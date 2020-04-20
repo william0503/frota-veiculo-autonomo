@@ -1,0 +1,24 @@
+{
+  "name": "frota-veiculo-autonomo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/app.js",
+    "dev": "nodemon ./src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "heroku": "^7.39.3",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "nedb": "^1.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
