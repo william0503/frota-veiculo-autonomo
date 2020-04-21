@@ -15,12 +15,12 @@ const VehicleController = require('./controllers/VehicleController');
 
 
 routes.get('/vehicles', VehicleController.index);
-routes.post('/vehicles', UserCoVehicleControllerntroller.store);
+routes.post('/vehicles', VehicleController.store);
 routes.get('/vehicles/:id',VehicleController.show);
 routes.put('/vehicles/:id',VehicleController.update);
 routes.delete('/vehicles/:id', VehicleController.destroy);
 
-const RideController = require('./controllers/RideController');
+const RideController = require('./controllers/RidesController');
 
 routes.post('/rides', RideController.store);
 routes.get('/rides/:id',RideController.show);

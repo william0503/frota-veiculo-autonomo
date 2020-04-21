@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Routes from './routes'
+import './global.css'
+// componente no react é uma função que retorna html
+// podendo ter funcionalidades javascript, css.
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes />
   );
 }
 
 export default App;
+
+
+
+// As propriedades no React são atributos passados para os componentes.
+  // const [counter, setValue] = useState(0);
+
+  // // Quando utlizamos o useStae é retornado um array, 
+  // // onde o Array possui duas posições [valor, funcao que atualiza]
+
+  // function increment(){
+  //   setValue(counter + 1);
+  //   console.log(counter)
+  // }

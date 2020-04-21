@@ -1,9 +1,9 @@
 //Criando o Schema 
 
-const mongooe = require('mongoose');
+const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 
-const RideSchema = new mongooe.Schema({
+const RideSchema = new mongoose.Schema({
     User:{
         type: Object,
         required: true
@@ -38,4 +38,4 @@ const RideSchema = new mongooe.Schema({
 RideSchema.plugin(mongoosePaginate);
 
 // Registrando o schema
-mongooe.model('Ride', RideSchema);
+mongoose.model('Ride', RideSchema);
