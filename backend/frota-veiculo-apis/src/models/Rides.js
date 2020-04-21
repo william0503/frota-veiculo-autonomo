@@ -16,9 +16,21 @@ const RideSchema = new mongooe.Schema({
         type: String,
         required: true
     },
-    GoalPlace:{
+    FinishPlace:{
         type: String,
         required: true
+    },
+    Status:{
+        type: String,
+        required: true
+    },
+    StartTime:{
+        type: Date,
+        required: false
+    },
+    GoalFinish:{
+        type: Date,
+        required: false
     }
 });
 

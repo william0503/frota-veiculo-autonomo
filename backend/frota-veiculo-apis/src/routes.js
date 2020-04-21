@@ -14,11 +14,17 @@ routes.delete('/users/:id', UserController.destroy);
 const VehicleController = require('./controllers/VehicleController');
 
 
-routes.get('/vehicles', UserController.index);
-routes.post('/vehicles', UserController.store);
-routes.get('/vehicles/:id',UserController.show);
-routes.put('/vehicles/:id',UserController.update);
-routes.delete('/vehicles/:id', UserController.destroy);
+routes.get('/vehicles', VehicleController.index);
+routes.post('/vehicles', UserCoVehicleControllerntroller.store);
+routes.get('/vehicles/:id',VehicleController.show);
+routes.put('/vehicles/:id',VehicleController.update);
+routes.delete('/vehicles/:id', VehicleController.destroy);
 
+const RideController = require('./controllers/RideController');
+
+routes.post('/rides', RideController.store);
+routes.get('/rides/:id',RideController.show);
+routes.put('/rides/:id',RideController.update);
+routes.put('/rides/:id', RideController.update);
 
 module.exports = routes;
