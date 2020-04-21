@@ -3,22 +3,14 @@
   "info": {
     "description": "API para gestão de frota de veículos autonomos",
     "version": "1.0.0",
-    "title": "Frota de veículos autonomos",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": {
-      "email": "apiteam@swagger.io"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    "title": "Frota de veículos autonomos"
   },
   "host": "localhost:3001/api",
   "basePath": "/",
   "tags": [
     {
-      "name": "Usuário",
-      "description": "Gestão de usuário"
+      "name": "Users",
+      "description": "User management"
     }
   ],
   "schemes": [
@@ -28,17 +20,15 @@
     "/users": {
       "post": {
         "tags": [
-          "usuário"
+          "users"
         ],
         "summary": "Adiciona novo usuário",
         "description": "",
         "operationId": "addUsuario",
         "consumes": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -48,69 +38,40 @@
             "description": "Dados de usuário necessários para cadastrar",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/users"
+              "$ref": "http://localhost:3001/api/users"
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "user added successfully"
+          },
           "405": {
-            "description": "Invalid input"
+            "description": "method not allowed"
           }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        }
       },
-      "put": {
+      "get": {
         "tags": [
-          "usuário"
+          "users"
         ],
-        "summary": "Atualizar dados de usuário",
+        "summary": "Pesquisa todos os usuarios cadastrados",
         "description": "",
-        "operationId": "updateUsuario",
+        "operationId": "getAllUsers",
         "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Dados de usuário necessários para atualizar",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Usuario"
-            }
-          }
+        "produces": [
+          "application/json"
         ],
         "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
+          "200": {
+            "description": "successfully"
           },
           "405": {
-            "description": "Validation exception"
+            "description": "method not allowed"
           }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        }
       }
     }
   },
@@ -131,173 +92,21 @@
     }
   },
   "definitions": {
-    "Order": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "petId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "shipDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "description": "Order Status",
-          "enum": [
-            "placed",
-            "approved",
-            "delivered"
-          ]
-        },
-        "complete": {
-          "type": "boolean",
-          "default": false
-        }
-      },
-      "xml": {
-        "name": "Order"
-      }
-    },
-    "Category": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "xml": {
-        "name": "Category"
-      }
-    },
     "User": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "username": {
+        "name": {
           "type": "string"
         },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
+        "telephone": {
           "type": "string"
         },
         "email": {
           "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "userStatus": {
-          "type": "integer",
-          "format": "int32",
-          "description": "User Status"
         }
       },
       "xml": {
         "name": "User"
-      }
-    },
-    "Tag": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "xml": {
-        "name": "Tag"
-      }
-    },
-    "Pet": {
-      "type": "object",
-      "required": [
-        "name",
-        "photoUrls"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "category": {
-          "$ref": "#/definitions/Category"
-        },
-        "name": {
-          "type": "string",
-          "example": "doggie"
-        },
-        "photoUrls": {
-          "type": "array",
-          "xml": {
-            "name": "photoUrl",
-            "wrapped": true
-          },
-          "items": {
-            "type": "string"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "xml": {
-            "name": "tag",
-            "wrapped": true
-          },
-          "items": {
-            "$ref": "#/definitions/Tag"
-          }
-        },
-        "status": {
-          "type": "string",
-          "description": "pet status in the store",
-          "enum": [
-            "available",
-            "pending",
-            "sold"
-          ]
-        }
-      },
-      "xml": {
-        "name": "Pet"
-      }
-    },
-    "ApiResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "type": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
       }
     }
   },
