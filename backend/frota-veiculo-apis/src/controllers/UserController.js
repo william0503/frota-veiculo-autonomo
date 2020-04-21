@@ -23,13 +23,13 @@ module.exports={
     },
     
     async update(req, res){
-        const User = await User.findByIdAndUpdate(req.params.id, req.body, { new:true });
+        const users = await User.findByIdAndUpdate(req.params.id, req.body, { new:true });
 
-        return res.json(User);
+        return res.json(users);
     },
 
     async destroy(req,res){
-        const User = await User.findByIdAndRemove(req.params.id);
+        const users = await User.findByIdAndRemove(req.params.id);
 
         return res.send();
     }
