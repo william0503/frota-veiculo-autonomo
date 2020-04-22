@@ -11,6 +11,10 @@ const VehicleSchema = new mongoose.Schema({
     licensePlate:{
         type: String,
         required: true,
+    },
+    status:{
+        type: String,
+        required: true
     }
 });
 

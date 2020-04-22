@@ -8,7 +8,7 @@ module.exports={
         const { page = 1 } = req.query;
         // no objeto vazio passaríamos o Where (filtros)
         const users = await User.paginate({}, { page, limit:10 });
-        console.log("Usuário(s) obtido(s): " + users)
+        console.log("Usuário(s) obtido(s): " + users.docs)
         return res.json(users);
     },
     async show(req,res){

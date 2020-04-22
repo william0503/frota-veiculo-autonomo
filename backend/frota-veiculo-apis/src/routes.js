@@ -7,7 +7,7 @@ const UserController = require('./controllers/UserController');
 
 routes.get('/users', UserController.index);
 routes.post('/users', UserController.store);
-routes.get('/users/:id',UserController.show);
+routes.get('/users/:di',UserController.show);
 routes.put('/users/:id',UserController.update);
 routes.delete('/users/:id', UserController.destroy);
 
@@ -20,11 +20,11 @@ routes.get('/vehicles/:id',VehicleController.show);
 routes.put('/vehicles/:id',VehicleController.update);
 routes.delete('/vehicles/:id', VehicleController.destroy);
 
-const RideController = require('./controllers/RidesController');
+const RideController = require('./controllers/RideController');
 
-routes.post('/rides', RideController.store);
-routes.get('/rides/:id',RideController.show);
-routes.put('/rides/:id',RideController.update);
-routes.put('/rides/:id', RideController.update);
+routes.post('/rides', RideController.ask);
+routes.get('/rides/:id',RideController.status);
+routes.put('/rides/:id',RideController.start);
+routes.put('/rides/:id', RideController.finish);
 
 module.exports = routes;
