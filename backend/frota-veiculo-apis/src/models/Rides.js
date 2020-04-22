@@ -3,6 +3,29 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Ride:
+ *        type: object
+ *        properties:
+ *          User:
+ *              $ref: '#/components/schemas/User'
+ *          Vehicle:
+ *             $ref: '#/components/schemas/Vehicle'
+ *          StartPlace:
+ *              type: string
+ *          FinishPlace:
+ *              type: string
+ *          Status :
+ *              type: string
+ *          StartTime:
+ *              type: sate
+ *          GoalFinish:
+ *              type: date
+ *          
+ */
 const RideSchema = new mongoose.Schema({
     User:{
         type: Object,

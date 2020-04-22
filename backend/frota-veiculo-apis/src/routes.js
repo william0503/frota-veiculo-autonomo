@@ -4,10 +4,25 @@ const routes = express.Router();
 // importando o controller 
 const UserController = require('./controllers/UserController');
 
-
+/**
+ * @swagger
+ * path:
+ *  /users/:
+ *    get:
+ *      summary: get
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ *               
+ */
 routes.get('/users', UserController.index);
 routes.post('/users', UserController.store);
-routes.get('/users/:di',UserController.show);
+routes.get('/users/:id',UserController.show);
 routes.put('/users/:id',UserController.update);
 routes.delete('/users/:id', UserController.destroy);
 

@@ -5,6 +5,7 @@ const requireDir = require('require-dir');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const specs = require('./swaggerDef');
  
 
 //Iniciando o App
@@ -28,7 +29,10 @@ app.use('/api', require('./src/routes'));
 
 
 // instanciando o swagger 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docsold', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 
 app.listen(3001);
 
