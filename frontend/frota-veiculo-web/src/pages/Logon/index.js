@@ -14,14 +14,14 @@ export default function Logon(){
         event.preventDefault();
         try{
             // Post de login do usuario ja registrado
-            const res =  await api.post('users', { telephone });
+            //const res =  await api.post('users', { telephone });
 
             // Salvando alguns dados importantes no Storage da aplicação
             localStorage.setItem('userPhone', telephone);
-            localStorage.setItem('userName', res.data.name);
+            localStorage.setItem('userName', 'Jaque');
 
             // mandando para a rota de solicitaco de corrida
-            //history.push('/<<<<>>>>>')
+            history.push('/profile')
 
         }
         catch(err){
@@ -37,7 +37,7 @@ export default function Logon(){
                     <h1>Faça o seu Login</h1>
                     <input 
                         placeholder="Seu telefone" 
-                        value={telephone}
+                        value={'telephone'}
                         onChange={e=> setTelephone(e.target.value)}
                     />
                     <button className = "button" type="submit">Entrar</button>
