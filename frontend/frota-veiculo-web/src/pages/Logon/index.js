@@ -21,7 +21,7 @@ export default function Logon(){
             localStorage.setItem('userName', 'Jaque');
 
             // mandando para a rota de solicitaco de corrida
-            history.push('/profile')
+            history.push('/running/new')
 
         }
         catch(err){
