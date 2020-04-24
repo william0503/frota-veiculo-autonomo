@@ -9,7 +9,9 @@ const UserController = require('./controllers/UserController');
  * path:
  *  /users/:
  *    get:
- *      summary: get
+ *      tags:
+ *          - Users
+ *      summary: Lista de Usuários
  *           
  *      responses:
  *        "200":
@@ -21,25 +23,367 @@ const UserController = require('./controllers/UserController');
  *               
  */
 routes.get('/users', UserController.index);
+/**
+ * @swagger
+ * path:
+ *  /users/:
+ *    post:
+ *      tags:
+ *          - Users
+ *      summary: Adiciona um Usuário
+ *
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.post('/users', UserController.store);
+/**
+ * @swagger
+ * path:
+ *  /users/{id}:
+ *    get:
+ *      tags:
+ *          - Users
+ *      summary: Usuário por Id
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ */
 routes.get('/users/:id',UserController.show);
+/**
+ * @swagger
+ * path:
+ *  /users/{id}:
+ *    put:
+ *      tags:
+ *          - Users
+ * 
+ *      summary: Altera um Usuário
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.put('/users/:id',UserController.update);
+/**
+ * @swagger
+ * path:
+ *  /users/{id}:
+ *    delete:
+ *      tags:
+ *          - Users
+ * 
+ *      summary: Deleta um Usuário
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *
+ *      responses:
+ *        "200":
+ *          description: Ok
+  *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.delete('/users/:id', UserController.destroy);
 
 const VehicleController = require('./controllers/VehicleController');
 
-
+/**
+ * @swagger
+ * path:
+ *  /vehicles/:
+ *    get:
+ *      tags:
+ *          - Vehicles
+ *      summary: Lista de Veículos
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Vehicle'
+ *               
+ */
 routes.get('/vehicles', VehicleController.index);
+/**
+ * @swagger
+ * path:
+ *  /vehicles/:
+ *    post:
+ *      tags:
+ *          - Vehicles
+ *      summary: Adiciona um Veículo
+ *
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Vehicle'
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Vehicle'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.post('/vehicles', VehicleController.store);
+/**
+ * @swagger
+ * path:
+ *  /vehicles/{id}:
+ *    get:
+ *      tags:
+ *          - Vehicles
+ *      summary: Veículo por Id
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Veículo
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Vehicle'
+ */
 routes.get('/vehicles/:id',VehicleController.show);
+/**
+ * @swagger
+ * path:
+ *  /vehicles/{id}:
+ *    put:
+ *      tags:
+ *          - Vehicles
+ * 
+ *      summary: Altera um Veículo
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Veículo
+ *            required: true
+ *            schema:
+ *              type: string
+ *
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Vehicle'
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Vehicle'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.put('/vehicles/:id',VehicleController.update);
+/**
+ * @swagger
+ * path:
+ *  /vehicles/{id}:
+ *    delete:
+ *      tags:
+ *          - Vehicles
+ * 
+ *      summary: Deleta um Veículo
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Veículo
+ *            required: true
+ *            schema:
+ *              type: string
+ *
+ *      responses:
+ *        "200":
+ *          description: Ok
+  *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Vehicle'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.delete('/vehicles/:id', VehicleController.destroy);
 
 const RideController = require('./controllers/RideController');
 
+/**
+ * @swagger
+ * path:
+ *  /rides/:
+ *    post:
+ *      tags:
+ *          - Rides
+ *      summary: Adiciona uma Corrida
+ *
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Ride'
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.post('/rides', RideController.ask);
+/**
+ * @swagger
+ * path:
+ *  /Rides/{id}:
+ *    get:
+ *      tags:
+ *          - Rides
+ *      summary: Corrida por Id
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id da Corrida
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ */
 routes.get('/rides/:id',RideController.status);
-routes.put('/rides/:id',RideController.start);
-routes.put('/rides/:id', RideController.finish);
+/**
+ * @swagger
+ * path:
+ *  /rides/{id}:
+ *    patch:
+ *      tags:
+ *          - Rides
+ * 
+ *      summary: Atualiza Horário de Início ou Fim da Corrida
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id da Corrida
+ *            required: true
+ *            schema:
+ *              type: string
+ *
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties: 
+ *                          start:
+ *                              type: string
+ *                          finish:
+ *                              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ *       
+ *        "500":
+ *          description: Erro        
+ */
+routes.patch('/rides/:id',RideController.updateStatus);
+
 
 module.exports = routes;
