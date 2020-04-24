@@ -69,7 +69,7 @@ export default function Profile(){
                 <p>{`CORRIDA NO DIA 17/06`}</p>
 
                 <strong>VEÍCULO</strong>
-                <p>{`DX-2118`}</p>
+                <p>{`DQX-2118`}</p>
 
                 <strong>ORIGEM E DESTINO:</strong>
                 <p>{`ORIGEM: SP | DESTINO: NOVA IORQUE`}</p>

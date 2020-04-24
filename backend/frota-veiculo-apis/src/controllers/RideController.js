@@ -32,24 +32,24 @@ module.exports={
         return res.json(ride);
     },
     
-    async start(req, res){
+    async updateStatus(req, res){
 
         let ride = await Ride.findById(req.params.id);
+        const { type } = req.params.body;
+
+        if(type == 'start'){
+            ride.startDate = new Date();
+        }
+        else if (type == 'finish') {
+            ride.finishDate = new Date();
+        }
+        else{
+            //TODO Tratar erro
+            throw new Exception();
+        }
         
-        ride.startDate = new Date()
-        
-        ride = await Ride.findByIdAndUpdate(req.params.id, ride, { new:true });
+        ride = await Ride.findByIdAndUpdate(req.params.id, ride, { new: true });
 
         return res.json(ride);
     },
-
-    async finish(req, res){
-        let ride = await Ride.findById(req.params.id);
-        
-        ride.finishDate = new Date()
-        
-        ride = await Ride.findByIdAndUpdate(req.params.id, ride, { new:true });
-
-        return res.json(ride);
-    }
 };
