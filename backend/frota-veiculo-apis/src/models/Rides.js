@@ -10,19 +10,19 @@ const mongoosePaginate = require('mongoose-paginate');
  *      Ride:
  *        type: object
  *        properties:
- *          User:
+ *          user:
  *              $ref: '#/components/schemas/User'
- *          Vehicle:
+ *          vehicle:
  *             $ref: '#/components/schemas/Vehicle'
- *          StartPlace:
+ *          startPlace:
  *              type: string
- *          FinishPlace:
+ *          finishPlace:
  *              type: string
- *          Status :
+ *          status :
  *              type: string
- *          StartTime:
+ *          startTime:
  *              type: sate
- *          GoalFinish:
+ *          finishTime:
  *              type: date
  * 
  *        required:
@@ -34,31 +34,31 @@ const mongoosePaginate = require('mongoose-paginate');
  *          
  */
 const RideSchema = new mongoose.Schema({
-    User:{
+    user:{
         type: Object,
         required: true
     },
-    Vehicle:{
+    vehicle:{
         type: Object,
         required: true
     },
-    StartPlace:{
+    startPlace:{
         type: String,
         required: true
     },
-    FinishPlace:{
+    finishPlace:{
         type: String,
         required: true
     },
-    Status:{
+    status:{
         type: String,
         required: true
     },
-    StartTime:{
+    startTime:{
         type: Date,
         required: false
     },
-    GoalFinish:{
+    finishTime:{
         type: Date,
         required: false
     }

@@ -18,7 +18,10 @@ app.use(cors());
 mongoose.connect(
     //'mongodb://localhost:27017/frotaVeiculo',
 "mongodb+srv://william0503:senha1234@cluster0-8siwt.gcp.mongodb.net/frota-autonoma?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
+    { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+     }
 );
 
 // Fazendo o Require do Schema

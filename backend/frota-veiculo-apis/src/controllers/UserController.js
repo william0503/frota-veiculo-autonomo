@@ -12,7 +12,7 @@ module.exports={
         return res.json(users);
     },
     async show(req,res){
-        const user = await User.findById(req.params.id);
+        const user = await User.find({telephone: req.params.id});
         console.log("Usuário obtido: " + user)
         return res.json(user);
     },

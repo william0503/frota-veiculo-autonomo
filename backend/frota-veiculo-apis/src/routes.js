@@ -11,7 +11,7 @@ const UserController = require('./controllers/UserController');
  *    get:
  *      tags:
  *          - Users
- *      summary: Lista de UsuÃ¡rios
+ *      summary: Lista de Usuários
  *           
  *      responses:
  *        "200":
@@ -30,7 +30,7 @@ routes.get('/users', UserController.index);
  *    post:
  *      tags:
  *          - Users
- *      summary: Adiciona um UsuÃ¡rio
+ *      summary: Adiciona um Usuário
  *
  *      requestBody:
  *          required: true
@@ -58,12 +58,12 @@ routes.post('/users', UserController.store);
  *    get:
  *      tags:
  *          - Users
- *      summary: UsuÃ¡rio por Id
+ *      summary: Usuário por Id
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do UsuÃ¡rio
+ *            description: Id do Usuário
  *            required: true
  *            schema:
  *              type: string
@@ -85,12 +85,12 @@ routes.get('/users/:id',UserController.show);
  *      tags:
  *          - Users
  * 
- *      summary: Altera um UsuÃ¡rio
+ *      summary: Altera um Usuário
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do UsuÃ¡rio
+ *            description: Id do Usuário
  *            required: true
  *            schema:
  *              type: string
@@ -122,12 +122,12 @@ routes.put('/users/:id',UserController.update);
  *      tags:
  *          - Users
  * 
- *      summary: Deleta um UsuÃ¡rio
+ *      summary: Deleta um Usuário
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do UsuÃ¡rio
+ *            description: Id do Usuário
  *            required: true
  *            schema:
  *              type: string
@@ -154,7 +154,7 @@ const VehicleController = require('./controllers/VehicleController');
  *    get:
  *      tags:
  *          - Vehicles
- *      summary: Lista de VeÃ­culos
+ *      summary: Lista de Veículos
  *           
  *      responses:
  *        "200":
@@ -173,7 +173,7 @@ routes.get('/vehicles', VehicleController.index);
  *    post:
  *      tags:
  *          - Vehicles
- *      summary: Adiciona um VeÃ­culo
+ *      summary: Adiciona um Veículo
  *
  *      requestBody:
  *          required: true
@@ -201,11 +201,11 @@ routes.post('/vehicles', VehicleController.store);
  *    get:
  *      tags:
  *          - Vehicles
- *      summary: VeÃ­culo por Id
+ *      summary: Veículo por Id
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do VeÃ­culo
+ *            description: Id do Veículo
  *            required: true
  *            schema:
  *              type: string
@@ -227,12 +227,12 @@ routes.get('/vehicles/:id',VehicleController.show);
  *      tags:
  *          - Vehicles
  * 
- *      summary: Altera um VeÃ­culo
+ *      summary: Altera um Veículo
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do VeÃ­culo
+ *            description: Id do Veículo
  *            required: true
  *            schema:
  *              type: string
@@ -264,12 +264,12 @@ routes.put('/vehicles/:id',VehicleController.update);
  *      tags:
  *          - Vehicles
  * 
- *      summary: Deleta um VeÃ­culo
+ *      summary: Deleta um Veículo
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do VeÃ­culo
+ *            description: Id do Veículo
  *            required: true
  *            schema:
  *              type: string
@@ -317,6 +317,7 @@ const RideController = require('./controllers/RideController');
  *          description: Erro        
  */
 routes.post('/rides', RideController.ask);
+routes.get('/rides',RideController.history);
 /**
  * @swagger
  * path:
@@ -350,7 +351,7 @@ routes.get('/rides/:id',RideController.status);
  *      tags:
  *          - Rides
  * 
- *      summary: Atualiza HorÃ¡rio de InÃ­cio ou Fim da Corrida
+ *      summary: Atualiza Horário de Início ou Fim da Corrida
  * 
  *      parameters:
  *          - name: id

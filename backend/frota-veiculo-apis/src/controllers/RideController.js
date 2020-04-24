@@ -1,11 +1,19 @@
 const mongoose = require('mongoose');
-const Ride = mongoose.model('Ride');
 const User = mongoose.model('User');
 const Vehicle = mongoose.model('Vehicle');
-
+const Ride = mongoose.model('Ride');
 module.exports={
     async status(req,res){
         const rides = await Ride.findById(req.params.id);
+
+        return res.json(rides);
+    },
+    async history(req, res){
+        
+        // utilizando a desestruturação, vamos acessar os parâmetros do request
+        const { page = 1 } = req.query;
+        // no objeto vazio passaríamos o Where (filtros)
+        const rides = await Ride.paginate({}, { page, limit:10 });
 
         return res.json(rides);
     },
@@ -13,20 +21,23 @@ module.exports={
 
         const { email, startPlace, finishPlace } = req.body
         const user = await User.findOne({email: email})
-        const vehicle = await Vehicle.findOne({status: "available"})
+
+        let vehicle = await Vehicle.findOne({status: 'available'})
+        
         if(!vehicle) {
             //TODO: Criar veiculo aleatorio
             vehicle = await Vehicle.create({
-                model: "tesla model S",
-                licensePlate: "ABC-1234",
-                status: "busy"
+                model: 'tesla model S',
+                licensePlate: 'ABC1234',
+                status: 'busy'
             })
         }
         const ride = await Ride.create({
-            User: user,  
-            Vehicle: vehicle,
+            user: user,  
+            vehicle: vehicle,
             startPlace: startPlace,
-            finishPlace: finishPlace
+            finishPlace: finishPlace,
+            status: 'asked'
         });
 
         return res.json(ride);
