@@ -24,6 +24,13 @@ const mongoosePaginate = require('mongoose-paginate');
  *              type: sate
  *          GoalFinish:
  *              type: date
+ * 
+ *        required:
+ *          - User
+ *          - Vehicle
+ *          - StartPlace
+ *          - FinishPlace
+ *          - Status
  *          
  */
 const RideSchema = new mongoose.Schema({

@@ -16,6 +16,11 @@ const mongoosePaginate = require('mongoose-paginate');
  *              type: string
  *          email:
  *              type: string
+ * 
+ *        required:
+ *          - name
+ *          - telephone
+ *          - email
  *          
  */
 const UserSchema = new mongoose.Schema({

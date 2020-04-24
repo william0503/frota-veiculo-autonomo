@@ -16,6 +16,11 @@ const mongoosePaginate = require('mongoose-paginate');
  *              type: string
  *          status:
  *              type: string
+ * 
+ *        required:
+ *          - model
+ *          - licensePlate
+ *          - status
  *          
  */
 const VehicleSchema = new mongoose.Schema({
