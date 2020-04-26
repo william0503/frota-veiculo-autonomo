@@ -11,7 +11,7 @@ const UserController = require('./controllers/UserController');
  *    get:
  *      tags:
  *          - Users
- *      summary: Lista de Usuários
+ *      summary: Lista de UsuÃ¡rios
  *           
  *      responses:
  *        "200":
@@ -30,7 +30,7 @@ routes.get('/users', UserController.index);
  *    post:
  *      tags:
  *          - Users
- *      summary: Adiciona um Usuário
+ *      summary: Adiciona um UsuÃ¡rio
  *
  *      requestBody:
  *          required: true
@@ -58,12 +58,12 @@ routes.post('/users', UserController.store);
  *    get:
  *      tags:
  *          - Users
- *      summary: Usuário por Id
+ *      summary: UsuÃ¡rio por Id
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do Usuário
+ *            description: Id do UsuÃ¡rio
  *            required: true
  *            schema:
  *              type: string
@@ -85,12 +85,12 @@ routes.get('/users/:id',UserController.show);
  *      tags:
  *          - Users
  * 
- *      summary: Altera um Usuário
+ *      summary: Altera um UsuÃ¡rio
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do Usuário
+ *            description: Id do UsuÃ¡rio
  *            required: true
  *            schema:
  *              type: string
@@ -122,12 +122,12 @@ routes.put('/users/:id',UserController.update);
  *      tags:
  *          - Users
  * 
- *      summary: Deleta um Usuário
+ *      summary: Deleta um UsuÃ¡rio
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do Usuário
+ *            description: Id do UsuÃ¡rio
  *            required: true
  *            schema:
  *              type: string
@@ -154,7 +154,7 @@ const VehicleController = require('./controllers/VehicleController');
  *    get:
  *      tags:
  *          - Vehicles
- *      summary: Lista de Veículos
+ *      summary: Lista de VeÃ­culos
  *           
  *      responses:
  *        "200":
@@ -173,7 +173,7 @@ routes.get('/vehicles', VehicleController.index);
  *    post:
  *      tags:
  *          - Vehicles
- *      summary: Adiciona um Veículo
+ *      summary: Adiciona um VeÃ­culo
  *
  *      requestBody:
  *          required: true
@@ -201,11 +201,11 @@ routes.post('/vehicles', VehicleController.store);
  *    get:
  *      tags:
  *          - Vehicles
- *      summary: Veículo por Id
+ *      summary: VeÃ­culo por Id
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do Veículo
+ *            description: Id do VeÃ­culo
  *            required: true
  *            schema:
  *              type: string
@@ -227,12 +227,12 @@ routes.get('/vehicles/:id',VehicleController.show);
  *      tags:
  *          - Vehicles
  * 
- *      summary: Altera um Veículo
+ *      summary: Altera um VeÃ­culo
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do Veículo
+ *            description: Id do VeÃ­culo
  *            required: true
  *            schema:
  *              type: string
@@ -264,12 +264,12 @@ routes.put('/vehicles/:id',VehicleController.update);
  *      tags:
  *          - Vehicles
  * 
- *      summary: Deleta um Veículo
+ *      summary: Deleta um VeÃ­culo
  * 
  *      parameters:
  *          - name: id
  *            in: path
- *            description: Id do Veículo
+ *            description: Id do VeÃ­culo
  *            required: true
  *            schema:
  *              type: string
@@ -351,7 +351,7 @@ routes.get('/rides/:id',RideController.status);
  *      tags:
  *          - Rides
  * 
- *      summary: Atualiza Horário de Início ou Fim da Corrida
+ *      summary: Atualiza HorÃ¡rio de InÃ­cio ou Fim da Corrida
  * 
  *      parameters:
  *          - name: id
