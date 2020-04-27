@@ -21,7 +21,7 @@ const mongoosePaginate = require('mongoose-paginate');
  *          status :
  *              type: string
  *          startTime:
- *              type: sate
+ *              type: date
  *          finishTime:
  *              type: date
  * 

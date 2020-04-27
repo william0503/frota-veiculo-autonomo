@@ -318,10 +318,12 @@ const RideController = require('./controllers/RideController');
  */
 routes.post('/rides', RideController.ask);
 routes.get('/rides',RideController.history);
+routes.get('/rides/users/:id',RideController.userHistory);
+
 /**
  * @swagger
  * path:
- *  /Rides/{id}:
+ *  /rides/{id}:
  *    get:
  *      tags:
  *          - Rides
@@ -343,6 +345,7 @@ routes.get('/rides',RideController.history);
  *                  $ref: '#/components/schemas/Ride'
  */
 routes.get('/rides/:id',RideController.status);
+
 /**
  * @swagger
  * path:
@@ -363,15 +366,15 @@ routes.get('/rides/:id',RideController.status);
  *
  *      requestBody:
  *          required: true
+ *          description: Tipo da ação ('start ou finish')
  *          content:
  *              application/json:
  *                  schema:
  *                      type: object
  *                      properties: 
- *                          start:
+ *                          type:
  *                              type: string
- *                          finish:
- *                              type: string
+ *                          
  *           
  *      responses:
  *        "200":
