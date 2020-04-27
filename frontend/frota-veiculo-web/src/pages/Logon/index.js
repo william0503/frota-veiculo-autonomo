@@ -25,12 +25,12 @@ export default function Logon(){
 
         }
         catch(err){
-            if (err.response.status == 400){
+            if (err.response.status === 400){
                 alert(err.response.data);
                 history.push('/register')
             }
             else
-                alert('Falha no Login!');
+                alert(err.response.data);
         }
     }
     return(
