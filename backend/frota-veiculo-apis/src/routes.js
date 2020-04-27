@@ -317,7 +317,48 @@ const RideController = require('./controllers/RideController');
  *          description: Erro        
  */
 routes.post('/rides', RideController.ask);
+/**
+ * @swagger
+ * path:
+ *  /rides:
+ *    get:
+ *      tags:
+ *          - Rides
+ *      summary: Lista de Corridas
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ */
 routes.get('/rides',RideController.history);
+/**
+ * @swagger
+ * path:
+ *  /rides/users/{id}:
+ *    get:
+ *      tags:
+ *          - Rides
+ *      summary: Lista de corridas do Usuário
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ */
 routes.get('/rides/users/:id',RideController.userHistory);
 
 /**
