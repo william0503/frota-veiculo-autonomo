@@ -9,13 +9,18 @@ export default function Profile(){
     const userName = localStorage.getItem('userName');
     const userPhone = localStorage.getItem('userPhone');
     let rides = [];
-    
+    const [teste, setTeste] = useState([]);
+       
     const history = useHistory();
     debugger;
     useEffect(() => {
         api.get('rides/users/' + userPhone)
         .then(res => {
-            rides = (res.data);
+            rides = (res.data.docs);
+            console.log(...rides);
+            setTeste(...rides);
+            console.log('Vindo vazio nesse ponto');
+            console.log(teste);
         })
     }, [userPhone]);
 

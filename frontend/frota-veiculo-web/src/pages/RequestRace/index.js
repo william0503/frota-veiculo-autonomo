@@ -10,12 +10,12 @@ export default function RequestRace(props){
     // criando os estados para manipular os inputs 
     const history = useHistory();
     
-    const newHour = newHourRandom(new Date(2012, 0, 1));
+    const newHour = newHourRandom(new Date(2020, 0, 1));
 
     function newHourRandom(date){
         var atualDate = new Date();
         var localDate = new Date(date.getTime() + Math.random() * (atualDate.getTime() - date.getTime()));
-        return  localDate.getHours() + ':' + localDate.getMinutes();
+        return  localDate.geUTCtHours() + ':' + localDate.getUTCMinutes();
     }
     
     async function handleRegister(event) {
