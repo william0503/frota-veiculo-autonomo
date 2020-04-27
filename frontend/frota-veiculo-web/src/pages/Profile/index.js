@@ -8,19 +8,14 @@ export default function Profile(){
     
     const userName = localStorage.getItem('userName');
     const userPhone = localStorage.getItem('userPhone');
-    let rides = [];
-    const [teste, setTeste] = useState([]);
-       
+    const [items, setItems] = useState([]);
+
     const history = useHistory();
-    debugger;
+
     useEffect(() => {
         api.get('rides/users/' + userPhone)
         .then(res => {
-            rides = (res.data.docs);
-            console.log(...rides);
-            setTeste(...rides);
-            console.log('Vindo vazio nesse ponto');
-            console.log(teste);
+            setItems(res.data.docs);
         })
     }, [userPhone]);
 
@@ -30,6 +25,7 @@ export default function Profile(){
        history.push('/');
    }
 
+   
     return (
         <div className="profile-container">
             <header>
@@ -45,10 +41,13 @@ export default function Profile(){
             </header>
             <h1>Histórico de Corridas</h1>
             <ul>
-            {rides.map(props => (
+            {items.map(props => (
                     <li key={props._id}>
-                        <strong>CORRIDA:</strong>
-                        <p>{props.licensePlate}</p>
+                        <strong>VEÍCULO:</strong>
+                        <p>{props.vehicle.licensePlate}</p>
+
+                        <strong>ORIGEM:</strong>
+                        <p>{props.startPlace}</p>
 
                         <strong>DESTINO:</strong>
                         <p>{props.finishPlace}</p>
