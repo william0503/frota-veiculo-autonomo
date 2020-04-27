@@ -35,7 +35,8 @@ module.exports = {
         ride.finishTime = new Date();
         ride.status = 'finished';
             
-        ride.vehicle = vehicleService.setVehicleAvailable(ride.vehicle);
+        //ride.vehicle = vehicleService.setVehicleAvailable(ride.vehicle);
+        vehicleService.setVehicleAvailable(ride.vehicle);
 
         return await Ride.findByIdAndUpdate(ride._id, ride, { new: true });
     },
