@@ -1,1 +1,1 @@
-web: node index.js
+web: node backend/frota-veiculo-apis/server.js
