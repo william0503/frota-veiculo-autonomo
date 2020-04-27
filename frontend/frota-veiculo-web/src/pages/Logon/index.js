@@ -7,25 +7,37 @@ import './styles.css'
 import CarImg from '../../assets/car.png'
 import logoImg from '../../assets/logo.png'
 
-export default function Logon(){
+export default function Logon() {
     const [telephone, setTelephone] = useState('');
     const history = useHistory();
-    async function handleLogin(event){
+    async function handleLogin(event) {
         event.preventDefault();
-        try{
+        try {
             // Get de login do usuario ja registrado
-            const res =  await api.get('users/'+  telephone );
+            const res = await api.get('users/logon/' + telephone);
 
             // Salvando alguns dados importantes no Storage da aplicação
-            localStorage.setItem('userPhone', res.data.telephone);
-            localStorage.setItem('userName', res.data.name);
+            localStorage.setItem('userPhone', res.data.user.telephone);
+            localStorage.setItem('userName', res.data.user.name);
 
-            // mandando para a rota de solicitaco de corrida
-            history.push('/running/new')
+            if (res.data.ride != null) {
+                if (res.data.ride.status === "asked") {
+                    alert('Já foi solicitada uma corrida.')
+                    history.push('/race/new', res.data.ride);
+                }
+                else if (res.data.ride.status === "started") {
+                    alert('Existe uma corrida em andamento.')
+                    history.push('/race/finish', res.data.ride);
+                }
+            }
+            else {
+                // mandando para a rota de solicitaco de corrida
+                history.push('/running/new')
+            }
 
         }
-        catch(err){
-            if (err.response.status === 400){
+        catch (err) {
+            if (err.response.status === 400) {
                 alert(err.response.data);
                 history.push('/register')
             }
@@ -33,28 +45,28 @@ export default function Logon(){
                 alert(err.response.data);
         }
     }
-    return(
+    return (
         <div className="logon-container">
             <section className="form">
-                <img src={logoImg} alt="Me Leva Ai"/>
+                <img src={logoImg} alt="Me Leva Ai" />
 
                 <form onSubmit={handleLogin}>
                     <h1>Faça o seu Login</h1>
-                    <input 
-                        placeholder="Seu telefone" 
+                    <input
+                        placeholder="Seu telefone"
                         value={telephone}
-                        onChange={e=> setTelephone(e.target.value)}
+                        onChange={e => setTelephone(e.target.value)}
                     />
-                    <button className = "button" type="submit">Entrar</button>
+                    <button className="button" type="submit">Entrar</button>
 
                     <Link className="back-link" to="/register">
-                        <FiLogIn size={16} color = "#E02041"/>
+                        <FiLogIn size={16} color="#E02041" />
                         Não tenho cadastro
                     </Link>
                 </form>
             </section>
 
-            <img src={CarImg} alt="CarImg"/>
+            <img src={CarImg} alt="CarImg" />
         </div>
     )
 }
