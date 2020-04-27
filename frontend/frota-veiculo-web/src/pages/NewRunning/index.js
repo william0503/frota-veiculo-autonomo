@@ -4,30 +4,31 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import logoImg from '../../assets/logo.png';
 
-
+import api from '../../services/api'
 
 export default function NewRunning(){
-    const [source, setSource ] = useState('');
-    const [featured, setFeatured ] = useState('');
-    const userPhone = localStorage.getItem('userPhone');
+    const [startPlace, setstartPlace ] = useState('');
+    const [finishPlace, setfinishPlace ] = useState('');
+    const telephone = localStorage.getItem('userPhone');
     const history = useHistory();
     async function handleNewIncident(event){
         event.preventDefault();
 
         const data ={
-            source, 
-            featured,
+            telephone,
+            startPlace, 
+            finishPlace,
         };
 
         try{
-           data.source = 'Finlandia'
-           data.featured = 'Nova Iorque'
-
+           const res = await api.post('rides', data);
+           
            //////// mandar para a nova tela de acompahamento da corrida
-           history.push('/race/new');
+           history.push('/race/new', res.data);
 
         } catch(err){
-            alert('Erro ao solicitar corrida, tente novamente!')
+            //alert('Erro ao solicitar corrida, tente novamente!')
+            alert(err.response.data);
         }
 
     }
@@ -49,13 +50,13 @@ export default function NewRunning(){
 
                 <input 
                     placeholder="Origem" 
-                    value={source}
-                    onChange={e=>setSource(e.target.value)}
+                    value={startPlace}
+                    onChange={e=>setstartPlace(e.target.value)}
                     />
                 <input
                     placeholder="Destino" 
-                    value={featured}
-                    onChange={e=>setFeatured(e.target.value)}
+                    value={finishPlace}
+                    onChange={e=>setfinishPlace(e.target.value)}
                     />
 
                 <button className="button" type="submit">Solicitar</button>

@@ -6,9 +6,8 @@ import { Link, useHistory } from 'react-router-dom'
 import api from '../../services/api'
 
 import logoImg from '../../assets/logo.png'
-export default function FinishRace(){
+export default function FinishRace(props){
     // criando os estados para manipular os inputs 
-    const [vehicle, setVehicle] = useState('');
     const [timeArrival, setTime] = useState('');
     const [status, setStatus] = useState('');
     
@@ -18,11 +17,10 @@ export default function FinishRace(){
         event.preventDefault();
 
         // Objeto que está sendo instanciado pelo input e será utilizado na API 
-        const data ={vehicle, timeArrival, status};
+        const data ={"type": "finish"};
 
         try{
-            //const res = await api.post('users',data);
-            //alert(`Seu ID de acesso: ${res.data.telephone}`);
+            const res =  await api.patch('rides/' + props.location.state._id, data);
             history.push('/profile');
         }
         catch (err){
@@ -47,16 +45,13 @@ export default function FinishRace(){
                 <form onSubmit={handleRegister}>
                 <input 
                     placeholder="Veículo"
-                    value={`DDX-2118`}
-                    onChange={e => setVehicle(e.target.value)}
+                    value={props.location.state.vehicle.licensePlate}
                     disabled={true}
-                
                 />
                 <input 
                     type="Destino" 
                     placeholder="Destino"
-                    value={''}
-                    onChange={e => setTime(e.target.value)}
+                    value={props.location.state.finishPlace}
                     disabled={true}
                 />
                 <input 

@@ -13,19 +13,24 @@ export default function Logon(){
     async function handleLogin(event){
         event.preventDefault();
         try{
-            // Post de login do usuario ja registrado
-            //const res =  await api.post('users', { telephone });
+            // Get de login do usuario ja registrado
+            const res =  await api.get('users/'+  telephone );
 
             // Salvando alguns dados importantes no Storage da aplicação
-            localStorage.setItem('userPhone', telephone);
-            localStorage.setItem('userName', 'Jaque');
+            localStorage.setItem('userPhone', res.data.telephone);
+            localStorage.setItem('userName', res.data.name);
 
             // mandando para a rota de solicitaco de corrida
             history.push('/running/new')
 
         }
         catch(err){
-            alert('Falha no Login!');
+            if (err.response.status == 400){
+                alert(err.response.data);
+                history.push('/register')
+            }
+            else
+                alert('Falha no Login!');
         }
     }
     return(
@@ -37,7 +42,7 @@ export default function Logon(){
                     <h1>Faça o seu Login</h1>
                     <input 
                         placeholder="Seu telefone" 
-                        value={'telephone'}
+                        value={telephone}
                         onChange={e=> setTelephone(e.target.value)}
                     />
                     <button className = "button" type="submit">Entrar</button>
