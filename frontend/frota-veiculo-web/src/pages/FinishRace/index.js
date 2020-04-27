@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import './style.css'
 import { FiArrowLeft } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
@@ -7,11 +7,16 @@ import api from '../../services/api'
 
 import logoImg from '../../assets/logo.png'
 export default function FinishRace(props){
-    // criando os estados para manipular os inputs 
-    const [timeArrival, setTime] = useState('');
-    const [status, setStatus] = useState('');
-    
+   
     const history = useHistory();
+
+    const newHour = newHourRandom(new Date(2012, 0, 1));
+
+    function newHourRandom(date){
+        var atualDate = new Date();
+        var localDate = new Date(date.getTime() + Math.random() * (atualDate.getTime() - date.getTime()));
+        return  localDate.getHours() + ':' + localDate.getMinutes();
+    }
 
     async function handleRegister(event) {
         event.preventDefault();
@@ -56,8 +61,7 @@ export default function FinishRace(props){
                 />
                 <input 
                     placeholder="Hora de chegada"
-                    value={''}
-                    onChange={e => setStatus(e.target.value)}
+                    value={newHour}
                     disabled={true}
                 />                      
 

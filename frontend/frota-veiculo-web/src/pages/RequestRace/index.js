@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import './style.css'
 import { FiArrowLeft } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
@@ -9,7 +9,15 @@ import logoImg from '../../assets/logo.png'
 export default function RequestRace(props){
     // criando os estados para manipular os inputs 
     const history = useHistory();
+    
+    const newHour = newHourRandom(new Date(2012, 0, 1));
 
+    function newHourRandom(date){
+        var atualDate = new Date();
+        var localDate = new Date(date.getTime() + Math.random() * (atualDate.getTime() - date.getTime()));
+        return  localDate.getHours() + ':' + localDate.getMinutes();
+    }
+    
     async function handleRegister(event) {
         event.preventDefault();
 
@@ -48,7 +56,7 @@ export default function RequestRace(props){
                 <input 
                     type="Previsão de Chegada" 
                     placeholder="Previsão de Chegada"
-                    value={'21:30'}
+                    value={newHour}
                     disabled={true}
                     
                 />
