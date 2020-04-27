@@ -6,27 +6,21 @@ import { Link, useHistory } from 'react-router-dom'
 import api from '../../services/api'
 
 import logoImg from '../../assets/logo.png'
-export default function RequestRace(){
+export default function RequestRace(props){
     // criando os estados para manipular os inputs 
-    const [vehicle, setVehicle] = useState('');
-    const [timeArrival, setTime] = useState('');
-    const [status, setStatus] = useState('');
-    
     const history = useHistory();
 
     async function handleRegister(event) {
         event.preventDefault();
 
-        // Objeto que está sendo instanciado pelo input e será utilizado na API 
-        const data ={vehicle, timeArrival, status};
+        const data ={"type": "start"};
 
         try{
-            //const res = await api.post('users',data);
-            //alert(`Seu ID de acesso: ${res.data.telephone}`);
-            history.push('/race/finish');
+            const res =  await api.patch('rides/' + props.location.state._id, data);
+            history.push('/race/finish', res.data);
         }
         catch (err){
-            alert('Erro ao iniciar corrida!');
+            alert(err.response.data);
         }    }
 
 
@@ -47,8 +41,7 @@ export default function RequestRace(){
                 <form onSubmit={handleRegister}>
                 <input 
                     placeholder="Veículo"
-                    value={'DDX-2118'}
-                    onChange={e => setVehicle(e.target.value)}
+                    value={props.location.state.vehicle.licensePlate}
                     disabled={true}
                 
                 />
@@ -56,14 +49,12 @@ export default function RequestRace(){
                     type="Previsão de Chegada" 
                     placeholder="Previsão de Chegada"
                     value={'21:30'}
-                    onChange={e => setTime(e.target.value)}
                     disabled={true}
                     
                 />
                 <input 
                     placeholder="Status"
                     value={'AGUARDANDO INICIAR'}
-                    onChange={e => setStatus(e.target.value)}
                     disabled={true}
                 />                      
 

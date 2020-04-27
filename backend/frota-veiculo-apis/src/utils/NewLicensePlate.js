@@ -12,5 +12,5 @@ module.exports = () => {
         numbers += possibleNumbers.charAt(Math.floor(Math.random() * possibleNumbers.length));
     }
 
-    return `${letters}${numbers}`
+    return `${letters}-${numbers}`
 }
