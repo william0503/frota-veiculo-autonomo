@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import api from '../../services/api'
 
 import logoImg from '../../assets/logo.png'
-export default function Register(){
+export default function Register() {
     // criando os estados para manipular os inputs 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -18,52 +18,53 @@ export default function Register(){
         event.preventDefault();
 
         // Objeto que está sendo instanciado pelo input e será utilizado na API 
-        const data ={name, email, telephone};
+        const data = { name, email, telephone };
 
-        try{
-            const res = await api.post('users',data);
+        try {
+            const res = await api.post('users', data);
             alert(`Seu ID de acesso: ${res.data.telephone}`);
             history.push('/');
         }
-        catch (err){
-            alert('Erro no cadastro. Tente novamente!');
-        }    }
+        catch (err) {
+            alert(err.response.data)
+        }
+    }
 
 
     return (
         <div className="register-container">
             <div className="content">
                 <section>
-                <img src={logoImg} alt="Me Leva Ai"/>
-                <h1>Cadastro</h1>
-                <p>Faça seu cadastro, entre na plataforma e solicite uma corrida no Me Leva Ai!.</p>
+                    <img src={logoImg} alt="Me Leva Ai" />
+                    <h1>Cadastro</h1>
+                    <p>Faça seu cadastro, entre na plataforma e solicite uma corrida no Me Leva Ai!.</p>
 
-                <Link className="back-link" to="/">
-                    <FiArrowLeft size={16} color = "#E02041"/>
+                    <Link className="back-link" to="/">
+                        <FiArrowLeft size={16} color="#E02041" />
                     Voltar ao Login
                 </Link>
 
                 </section>
                 <form onSubmit={handleRegister}>
-                <input 
-                    placeholder="Nome"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                
-                />
-                <input 
-                    type="email" 
-                    placeholder="E-mail"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                />
-                <input 
-                    placeholder="Telefone"
-                    value={telephone}
-                    onChange={e => setTelephone(e.target.value)}
-                />                      
+                    <input
+                        placeholder="Nome"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
 
-                <button className="button" type="submit">Cadastrar</button>
+                    />
+                    <input
+                        type="email"
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <input
+                        placeholder="Telefone"
+                        value={telephone}
+                        onChange={e => setTelephone(e.target.value)}
+                    />
+
+                    <button className="button" type="submit">Cadastrar</button>
 
                 </form>
             </div>
