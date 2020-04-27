@@ -4,6 +4,8 @@ const routes = express.Router();
 // importando o controller 
 const UserController = require('./controllers/UserController');
 
+routes.get('/users/logon/:id', UserController.logon);
+
 /**
  * @swagger
  * path:
