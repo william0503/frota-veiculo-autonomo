@@ -9,7 +9,6 @@ export default function Profile(){
     const userName = localStorage.getItem('userName');
     const userPhone = localStorage.getItem('userPhone');
     const [items, setItems] = useState([]);
-
     const history = useHistory();
 
     useEffect(() => {
@@ -48,7 +47,7 @@ export default function Profile(){
                         <p>{props.startPlace}</p> <p>{props.finishPlace}</p>
  
                         <strong>DATA E HORA DE CHEGADA:</strong>
-                        <p>{props.finishTime}</p>
+                        <p>{new Date(props.finishTime).toLocaleString('pt-br')}</p>
 
                         <strong>STATUS</strong>
                         <p>{props.status}</p>
