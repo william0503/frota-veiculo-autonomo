@@ -54,15 +54,16 @@ export default function Profile() {
                 </Link>
                 <button onClick={handleLogout}
                     type="button">
-                    <FiPower size={16} color="#E02041" />
+                    <FiPower size={14} color="#E02041" />
                 </button>
                 <button onClick={previousPage} disabled={page === 1}>
-                    <FiArrowLeft size={16} color="#E02041" />
+                    <FiArrowLeft size={14} color="#E02041" />
                 </button>
+                <p>{page}/{pages}</p>
                 <button onClick={nextPage} disabled={page === pages}>
-                    <FiArrowRight size={16} color="#E02041" />
+                    <FiArrowRight size={14} color="#E02041" />
                 </button>
-                <p>{page} / {pages}</p>
+               
             </header>
             <h1>Histórico de Corridas</h1>
             <ul>
