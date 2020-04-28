@@ -26,11 +26,11 @@ export default function FinishRace(props){
         const data ={"type": "finish"};
 
         try{
-            const res =  await api.patch('rides/' + props.location.state._id, data);
+            await api.patch('rides/' + props.location.state._id, data);
             history.push('/profile');
         }
         catch (err){
-            alert('Erro ao finalizar corrida!');
+            alert(err.response.data);
         }    }
 
 
