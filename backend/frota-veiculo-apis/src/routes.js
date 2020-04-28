@@ -3,9 +3,6 @@ const routes = express.Router();
 
 // importando o controller 
 const UserController = require('./controllers/UserController');
-
-routes.get('/users/logon/:id', UserController.logon);
-
 /**
  * @swagger
  * path:
@@ -25,6 +22,61 @@ routes.get('/users/logon/:id', UserController.logon);
  *               
  */
 routes.get('/users', UserController.index);
+/**
+ * @swagger
+ * path:
+ *  /users/{id}:
+ *    get:
+ *      tags:
+ *          - Users
+ *      summary: Usuário por Id
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ */
+routes.get('/users/:id',UserController.show);
+/**
+ * @swagger
+ * path:
+ *  /users/logon/{id}:
+ *    get:
+ *      tags:
+ *          - Users
+ *      summary: Logon do Usuário
+ * 
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Logon'
+ *        "400":
+ *          description: Bad Request
+ */
+routes.get('/users/logon/:id', UserController.logon);
+
 /**
  * @swagger
  * path:
@@ -53,32 +105,6 @@ routes.get('/users', UserController.index);
  *          description: Erro        
  */
 routes.post('/users', UserController.store);
-/**
- * @swagger
- * path:
- *  /users/{id}:
- *    get:
- *      tags:
- *          - Users
- *      summary: Usuário por Id
- * 
- *      parameters:
- *          - name: id
- *            in: path
- *            description: Id do Usuário
- *            required: true
- *            schema:
- *              type: string
- *           
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/User'
- */
-routes.get('/users/:id',UserController.show);
 /**
  * @swagger
  * path:
@@ -146,6 +172,7 @@ routes.put('/users/:id',UserController.update);
  *          description: Erro        
  */
 routes.delete('/users/:id', UserController.destroy);
+
 
 const VehicleController = require('./controllers/VehicleController');
 
@@ -340,6 +367,32 @@ routes.get('/rides',RideController.history);
 /**
  * @swagger
  * path:
+ *  /rides/{id}:
+ *    get:
+ *      tags:
+ *          - Rides
+ *      summary: Corrida por Id
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id da Corrida
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ */
+routes.get('/rides/:id',RideController.status);
+
+/**
+ * @swagger
+ * path:
  *  /rides/users/{id}:
  *    get:
  *      tags:
@@ -363,31 +416,7 @@ routes.get('/rides',RideController.history);
  */
 routes.get('/rides/users/:id',RideController.userHistory);
 
-/**
- * @swagger
- * path:
- *  /rides/{id}:
- *    get:
- *      tags:
- *          - Rides
- *      summary: Corrida por Id
- *      parameters:
- *          - name: id
- *            in: path
- *            description: Id da Corrida
- *            required: true
- *            schema:
- *              type: string
- *           
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/Ride'
- */
-routes.get('/rides/:id',RideController.status);
+
 
 /**
  * @swagger
