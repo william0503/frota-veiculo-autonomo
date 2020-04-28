@@ -24,13 +24,11 @@ export default function Profile(){
        localStorage.clear();
        history.push('/');
    }
-
-   
     return (
         <div className="profile-container">
             <header>
                 <img src={logoImg} alt="Me Leva Ai"/>
-                <span>Bem vinda, {userName}</span>
+                <span>Bem vindo(a), {userName}</span>
                 <Link className="button" to="/running/new">
                     Cadastrar nova corrida
                 </Link>
@@ -46,14 +44,14 @@ export default function Profile(){
                         <strong>VEÍCULO:</strong>
                         <p>{props.vehicle.licensePlate}</p>
 
-                        <strong>ORIGEM:</strong>
-                        <p>{props.startPlace}</p>
-
-                        <strong>DESTINO:</strong>
-                        <p>{props.finishPlace}</p>
-
-                        <strong>CHEGADA:</strong>
+                        <strong>ORIGEM E DESTINO:</strong>
+                        <p>{props.startPlace}</p> <p>{props.finishPlace}</p>
+ 
+                        <strong>DATA E HORA DE CHEGADA:</strong>
                         <p>{props.finishTime}</p>
+
+                        <strong>STATUS</strong>
+                        <p>{props.status}</p>
                                                
                     </li>
                 ))}

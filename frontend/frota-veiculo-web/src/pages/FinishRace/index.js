@@ -15,7 +15,8 @@ export default function FinishRace(props){
     function newHourRandom(date){
         var atualDate = new Date();
         var localDate = new Date(date.getTime() + Math.random() * (atualDate.getTime() - date.getTime()));
-        return  localDate.geUTCtHours() + ':' + localDate.getUTCMinutes();
+        
+        return  localDate.getHours() + ':' + localDate.getMinutes();
     }
 
     async function handleRegister(event) {

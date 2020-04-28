@@ -15,7 +15,7 @@ export default function RequestRace(props){
     function newHourRandom(date){
         var atualDate = new Date();
         var localDate = new Date(date.getTime() + Math.random() * (atualDate.getTime() - date.getTime()));
-        return  localDate.geUTCtHours() + ':' + localDate.getUTCMinutes();
+        return  localDate.getHours() + ':' + localDate.getMinutes();
     }
     
     async function handleRegister(event) {
@@ -28,7 +28,8 @@ export default function RequestRace(props){
             history.push('/race/finish', res.data);
         }
         catch (err){
-            alert(err.response.data);
+            //alert(err.response.data);
+            alert("Erro ao solicitar corrida!");
         }    }
 
 

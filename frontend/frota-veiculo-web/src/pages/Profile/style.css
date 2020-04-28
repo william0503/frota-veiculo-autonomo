@@ -50,7 +50,7 @@
 .profile-container ul {
     display: grid;
     grid-template-columns:  repeat(2,1fr);
-    grid-gap: 24px;
+    grid-gap: 18px;
     list-style:  none;
 }
 
@@ -75,17 +75,17 @@
 
 .profile-container ul li strong {
     display: block;
-    margin-bottom: 16px;
-    color: #41414d;
+    margin-bottom: 10px;
+    color: #e0240e;
 
 }
 
 .profile-container ul li p + strong {
-    margin-top:32px
+    margin-top:16px
 }
 
 .profile-container ul li p{
     color: #737380;
-    line-height: 21px;
+    line-height: 20px;
     font-size: 16px;
 }
