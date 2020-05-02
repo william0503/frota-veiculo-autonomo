@@ -34,5 +34,5 @@ app.use('/api', require('./src/routes'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
-app.listen(3001);
+app.listen(process.env.PORT || 3000);
 
