@@ -2,10 +2,11 @@
   "name": "node-api",
   "version": "1.0.0",
   "description": "",
-  "main": "frota-veiculo-apis/server.js",
+  "main": "./server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon frota-veiculo-apis/server.js"
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js"
   },
   "keywords": [],
   "author": "",
