@@ -8,13 +8,14 @@ const TokenController = require('./controllers/TokenController');
  * path:
  *  /token/:
  *    post:
+ *      security: [] 
  *      tags:
  *          - Token
  *      summary: JWT Token
  *
 *      requestBody:
  *          required: true
- *          description: Tipo da ação ('start ou finish')
+ *          description: 
  *          content:
  *              application/json:
  *                  schema:
