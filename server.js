@@ -6,6 +6,7 @@ const requireDir = require('require-dir');
 const swaggerUi = require('swagger-ui-express');
 const specs = require('./src/doc/swaggerDef');
  
+require('dotenv/config');
 
 //Iniciando o App
 const app = express();

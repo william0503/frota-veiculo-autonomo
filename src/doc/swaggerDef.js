@@ -1,3 +1,4 @@
+require('dotenv/config');
 const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
@@ -19,7 +20,7 @@ const options = {
       },
       servers: [
         {
-          url: "http://localhost:3001/api/"
+          url: `${process.env.HOST}:${process.env.PORT}/api/`
         }
       ]
     },
