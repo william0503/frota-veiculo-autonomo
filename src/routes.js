@@ -3,6 +3,42 @@ const routes = express.Router();
 const authMiddleware = require("./middlewares/auth");
 
 const TokenController = require('./controllers/TokenController');
+/**
+ * @swagger
+ * path:
+ *  /token/:
+ *    post:
+ *      tags:
+ *          - Token
+ *      summary: JWT Token
+ *
+*      requestBody:
+ *          required: true
+ *          description: Tipo da ação ('start ou finish')
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties: 
+ *                          clientId:
+ *                              type: string
+ *                          clientSecret:
+ *                              type: string
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      token:
+ *                          type: string
+ *                  
+ *       
+ *        "500":
+ *          description: Erro        
+ */
 routes.post('/token', TokenController.authorize);
 
 

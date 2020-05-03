@@ -3,7 +3,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 
 const options = {
     swaggerDefinition: {
-      openapi: "3.0.0",
+      openapi: "3.0.1",
       info: {
         title: "Frota de veículos autonomos",
         version: "1.0.0",
@@ -22,7 +22,19 @@ const options = {
         {
           url: `${process.env.HOST}:${process.env.PORT}/api/`
         }
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          }
+        }
+      },
+      security: [{
+        bearerAuth: []
+      }]
     },
     apis: ['./src/routes.js', './src/models/*.js']
   };
