@@ -77,9 +77,6 @@ module.exports = {
 
         const logon = new Logon(user, ride);
         
-        return res.json({ 
-            logon, 
-            token: userService.generateToken({ id: user.telephone }) 
-        });
+        return res.json(logon);
     },
 };
