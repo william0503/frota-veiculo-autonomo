@@ -1,8 +1,15 @@
 const express = require('express');
 const routes = express.Router();
+const authMiddleware = require("./middlewares/auth");
 
-// importando o controller 
+const TokenController = require('./controllers/TokenController');
+routes.post('/token', TokenController.authorize);
+
+
+// Users
+
 const UserController = require('./controllers/UserController');
+
 /**
  * @swagger
  * path:
@@ -21,7 +28,8 @@ const UserController = require('./controllers/UserController');
  *                  $ref: '#/components/schemas/User'
  *               
  */
-routes.get('/users', UserController.index);
+routes.get('/users', authMiddleware, UserController.index);
+
 /**
  * @swagger
  * path:
@@ -47,7 +55,8 @@ routes.get('/users', UserController.index);
  *              schema:
  *                  $ref: '#/components/schemas/User'
  */
-routes.get('/users/:id',UserController.show);
+routes.get('/users/:id', authMiddleware, UserController.show);
+
 /**
  * @swagger
  * path:
@@ -75,7 +84,7 @@ routes.get('/users/:id',UserController.show);
  *        "400":
  *          description: Bad Request
  */
-routes.get('/users/logon/:id', UserController.logon);
+routes.get('/users/logon/:id', authMiddleware, UserController.logon);
 
 /**
  * @swagger
@@ -104,7 +113,8 @@ routes.get('/users/logon/:id', UserController.logon);
  *        "500":
  *          description: Erro        
  */
-routes.post('/users', UserController.store);
+routes.post('/users', authMiddleware, UserController.store);
+
 /**
  * @swagger
  * path:
@@ -141,7 +151,8 @@ routes.post('/users', UserController.store);
  *        "500":
  *          description: Erro        
  */
-routes.put('/users/:id',UserController.update);
+routes.put('/users/:id', authMiddleware, UserController.update);
+
 /**
  * @swagger
  * path:
@@ -171,8 +182,10 @@ routes.put('/users/:id',UserController.update);
  *        "500":
  *          description: Erro        
  */
-routes.delete('/users/:id', UserController.destroy);
+routes.delete('/users/:id', authMiddleware, UserController.destroy);
 
+
+//Vehicles
 
 const VehicleController = require('./controllers/VehicleController');
 
@@ -194,7 +207,8 @@ const VehicleController = require('./controllers/VehicleController');
  *                  $ref: '#/components/schemas/Vehicle'
  *               
  */
-routes.get('/vehicles', VehicleController.index);
+routes.get('/vehicles', authMiddleware, VehicleController.index);
+
 /**
  * @swagger
  * path:
@@ -222,7 +236,8 @@ routes.get('/vehicles', VehicleController.index);
  *        "500":
  *          description: Erro        
  */
-routes.post('/vehicles', VehicleController.store);
+routes.post('/vehicles', authMiddleware, VehicleController.store);
+
 /**
  * @swagger
  * path:
@@ -247,7 +262,8 @@ routes.post('/vehicles', VehicleController.store);
  *              schema:
  *                  $ref: '#/components/schemas/Vehicle'
  */
-routes.get('/vehicles/:id',VehicleController.show);
+routes.get('/vehicles/:id', authMiddleware,VehicleController.show);
+
 /**
  * @swagger
  * path:
@@ -284,7 +300,8 @@ routes.get('/vehicles/:id',VehicleController.show);
  *        "500":
  *          description: Erro        
  */
-routes.put('/vehicles/:id',VehicleController.update);
+routes.put('/vehicles/:id', authMiddleware,VehicleController.update);
+
 /**
  * @swagger
  * path:
@@ -314,7 +331,10 @@ routes.put('/vehicles/:id',VehicleController.update);
  *        "500":
  *          description: Erro        
  */
-routes.delete('/vehicles/:id', VehicleController.destroy);
+routes.delete('/vehicles/:id', authMiddleware, VehicleController.destroy);
+
+
+//Rides
 
 const RideController = require('./controllers/RideController');
 
@@ -345,7 +365,7 @@ const RideController = require('./controllers/RideController');
  *        "500":
  *          description: Erro        
  */
-routes.post('/rides', RideController.ask);
+routes.post('/rides', authMiddleware, RideController.ask);
 /**
  * @swagger
  * path:
@@ -363,7 +383,8 @@ routes.post('/rides', RideController.ask);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides',RideController.history);
+routes.get('/rides', authMiddleware, RideController.history);
+
 /**
  * @swagger
  * path:
@@ -388,7 +409,7 @@ routes.get('/rides',RideController.history);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides/:id',RideController.status);
+routes.get('/rides/:id', authMiddleware, RideController.status);
 
 /**
  * @swagger
@@ -414,9 +435,7 @@ routes.get('/rides/:id',RideController.status);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides/users/:id',RideController.userHistory);
-
-
+routes.get('/rides/users/:id', authMiddleware, RideController.userHistory);
 
 /**
  * @swagger
@@ -459,7 +478,6 @@ routes.get('/rides/users/:id',RideController.userHistory);
  *        "500":
  *          description: Erro        
  */
-routes.patch('/rides/:id',RideController.updateStatus);
-
+routes.patch('/rides/:id', authMiddleware, RideController.updateStatus);
 
 module.exports = routes;

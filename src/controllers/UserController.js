@@ -67,18 +67,19 @@ module.exports = {
     async logon(req, res) {
         const telephone = req.params.id;
 
-        let user = await userService.findUserByTelephone(telephone)
+        const user = await userService.findUserByTelephone(telephone)
 
         if (!user) {
             return res.status(400).send('Usuário não cadastrado');
         }
 
-        let ride = await rideService.checkBusyUser(user);
+        const ride = await rideService.checkBusyUser(user);
 
-        //var Logon = new Logon(user);
-
-        let logon = new Logon(user, ride);
-
-        return res.json(logon);
-    }
+        const logon = new Logon(user, ride);
+        
+        return res.json({ 
+            logon, 
+            token: userService.generateToken({ id: user.telephone }) 
+        });
+    },
 };
