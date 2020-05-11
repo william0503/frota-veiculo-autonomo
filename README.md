@@ -4,9 +4,11 @@ Aplicacao desenvolvida em NodeJS e React.
 
 Back End: <p>
   - [x] Node JS <p>
+  - [x] Mongo DB <p>
   - [x] Swagger <p>
+    Documentaçao Swagger: https://me-levame.herokuapp.com/api-docs/
     
-    Usando o mongoDB como Banco de Dados.
+
     
 Front End: <p>
   - [x] React <p>
