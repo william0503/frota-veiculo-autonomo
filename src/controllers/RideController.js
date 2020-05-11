@@ -13,6 +13,10 @@ module.exports = {
 
         return res.json(await rideService.getRides(page));
     },
+    async currentRide(req, res) {
+        const telephone = req.params.id;
+        return res.json(await rideService.getCurrentRide(telephone));
+    },
     async userHistory(req, res) {        
         const telephone = req.params.id;
         const { page = 1 } = req.query;

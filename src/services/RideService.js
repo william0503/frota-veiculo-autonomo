@@ -8,11 +8,15 @@ module.exports = {
     },
     async getRides(page){
         console.log('getRides')
-        return await Ride.paginate({}, { page, limit:10 });
+        return await Ride.paginate({}, { page, limit:10, sort: {startTime: -1} });
+    },
+    async getCurrentRide(telephone){
+        console.log(telephone)
+        return await Ride.find({'user.telephone': telephone, 'finishTime': null });
     },
     async getUserRides(telephone,page){
         console.log(telephone)
-        return await Ride.paginate({'user.telephone': telephone}, { page, limit:10 });
+        return await Ride.paginate({'user.telephone': telephone, 'finishTime': { $ne: null }}, { page, limit:10, sort: {finishTime: -1} });
     },
     async askNewRide(user, vehicle, startPlace, finishPlace){
         return await Ride.create({

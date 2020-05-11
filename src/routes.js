@@ -416,7 +416,31 @@ routes.get('/rides/:id',RideController.status);
  */
 routes.get('/rides/users/:id',RideController.userHistory);
 
-
+/**
+ * @swagger
+ * path:
+ *  /rides/current/users/{id}:
+ *    get:
+ *      tags:
+ *          - Rides
+ *      summary: Corrida atual do Usuário
+ *      parameters:
+ *          - name: id
+ *            in: path
+ *            description: Id do Usuário
+ *            required: true
+ *            schema:
+ *              type: string
+ *           
+ *      responses:
+ *        "200":
+ *          description: Ok
+ *          content:
+ *            application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Ride'
+ */
+routes.get('/rides/current/users/:id',RideController.currentRide);
 
 /**
  * @swagger
