@@ -12,6 +12,7 @@ Back End: <p>
     
 Front End: <p>
   - [x] React <p>
+Repositório: https://github.com/bruno-vieira-farias/frota-veiculo-autonomo-frontend
 
 Deploy: <p>
   - [x] Heroku <p> 
