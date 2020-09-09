@@ -29,5 +29,5 @@ app.use('/api', require('./src/routes'));
 // instanciando o swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Server running on port ${port}`));
