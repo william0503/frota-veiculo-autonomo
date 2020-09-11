@@ -21,4 +21,4 @@ artifacts:
     - package.json
     - node_modules/**/*
     - .env
-    - src
+    - src/**/*
