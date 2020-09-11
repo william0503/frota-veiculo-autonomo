@@ -20,3 +20,5 @@ artifacts:
     - server.js
     - package.json
     - node_modules/**/*
+    - .env
+    - src
