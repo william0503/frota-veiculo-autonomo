@@ -1,8 +1,10 @@
-//Criando o Schema 
+//Criando o Schema
+const uuid = require('uuid');
+const dynamoose = require('dynamoose');
 
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate');
-
+dynamoose.aws.sdk.config.update({
+  region: process.env.DYNAMODB_REGION,
+});
 /**
  * @swagger
  * components:
@@ -24,48 +26,57 @@ const mongoosePaginate = require('mongoose-paginate');
  *              type: date
  *          finishTime:
  *              type: date
- * 
+ *
  *        required:
  *          - User
  *          - Vehicle
  *          - StartPlace
  *          - FinishPlace
  *          - Status
- *          
+ *
  */
-const RideSchema = new mongoose.Schema({
-    user:{
-        type: Object,
-        required: true
+const RideSchema = new dynamoose.Schema(
+  {
+    id: {
+      type: String,
+      hashKey: true,
+      required: true,
+      default: uuid.v1(),
     },
-    vehicle:{
-        type: Object,
-        required: true
+    user: {
+      type: Object,
+      required: true,
     },
-    startPlace:{
-        type: String,
-        required: true
+    vehicle: {
+      type: Object,
+      required: true,
     },
-    finishPlace:{
-        type: String,
-        required: true
+    startPlace: {
+      type: String,
+      required: true,
     },
-    status:{
-        type: String,
-        required: true
+    finishPlace: {
+      type: String,
+      required: true,
     },
-    startTime:{
-        type: Date,
-        required: false
+    status: {
+      type: String,
+      required: true,
     },
-    finishTime:{
-        type: Date,
-        required: false
-    }
-});
-
-// Registrando o mongoose paginate da Aplicação
-RideSchema.plugin(mongoosePaginate);
+    startTime: {
+      type: Date,
+      required: false,
+    },
+    finishTime: {
+      type: Date,
+      required: false,
+    },
+  },
+  {
+    saveUnknown: true,
+  }
+);
 
 // Registrando o schema
-mongoose.model('Ride', RideSchema);
+const Ride = dynamoose.model('Ride', RideSchema);
+module.exports = Ride;

@@ -1,24 +1,31 @@
-const mongoose = require('mongoose');
-const Vehicle = mongoose.model('Vehicle');
+const Vehicle = require('../models/Vehicles');
+const dynamoose = require('dynamoose');
+
 const NewLicensePlate = require('../utils/NewLicensePlate');
 
 module.exports = {
-    async createVehicle() {
-        return await Vehicle.create({
-            model: 'Tesla Model S',
-            licensePlate: NewLicensePlate(),
-            status: 'busy'
-        })
-    },
-    async getAvailableVehicle(){
-        return await Vehicle.findOne({status: 'available'})
-    },
-    async setVehicleBusy(vehicle) {
-        vehicle.status = 'busy'
-        return await Vehicle.findByIdAndUpdate(vehicle._id, vehicle);
-    },
-    async setVehicleAvailable(vehicle) {
-        vehicle.status = 'available'
-        return await Vehicle.findByIdAndUpdate(vehicle._id, vehicle);
-    }
-}
+  async createVehicle() {
+    const licensePlate = NewLicensePlate();
+    console.log(licensePlate);
+    return await Vehicle.create({
+      model: 'Tesla Model S',
+      licensePlate: licensePlate,
+      status: 'busy',
+    });
+  },
+  async getAvailableVehicle() {
+    return await Vehicle.scan(
+      new dynamoose.Condition().where('status').eq('available')
+    )
+      .limit(1)
+      .exec();
+  },
+  async setVehicleBusy(vehicle) {
+    vehicle.status = 'busy';
+    return await Vehicle.update(vehicle.licensePlate, vehicle);
+  },
+  async setVehicleAvailable(vehicle) {
+    vehicle.status = 'available';
+    return await Vehicle.update(vehicle.licensePlate, vehicle);
+  },
+};
