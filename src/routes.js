@@ -1,8 +1,12 @@
 const express = require('express');
 const routes = express.Router();
 
-// importando o controller 
+// importando o controller
 const UserController = require('./controllers/UserController');
+routes.get('/', (req, res) => {
+  return res.send('Acesse ' + process.env.HOST + 'api-docs para documentação');
+});
+
 /**
  * @swagger
  * path:
@@ -11,7 +15,7 @@ const UserController = require('./controllers/UserController');
  *      tags:
  *          - Users
  *      summary: Lista de Usuários
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -19,7 +23,7 @@ const UserController = require('./controllers/UserController');
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/User'
- *               
+ *
  */
 routes.get('/users', UserController.index);
 /**
@@ -30,7 +34,7 @@ routes.get('/users', UserController.index);
  *      tags:
  *          - Users
  *      summary: Usuário por Id
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -38,7 +42,7 @@ routes.get('/users', UserController.index);
  *            required: true
  *            schema:
  *              type: string
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -47,7 +51,7 @@ routes.get('/users', UserController.index);
  *              schema:
  *                  $ref: '#/components/schemas/User'
  */
-routes.get('/users/:id',UserController.show);
+routes.get('/users/:id', UserController.show);
 /**
  * @swagger
  * path:
@@ -56,7 +60,7 @@ routes.get('/users/:id',UserController.show);
  *      tags:
  *          - Users
  *      summary: Logon do Usuário
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -64,7 +68,7 @@ routes.get('/users/:id',UserController.show);
  *            required: true
  *            schema:
  *              type: string
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -92,7 +96,7 @@ routes.get('/users/logon/:id', UserController.logon);
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/User'
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -100,9 +104,9 @@ routes.get('/users/logon/:id', UserController.logon);
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/User'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
 routes.post('/users', UserController.store);
 /**
@@ -112,9 +116,9 @@ routes.post('/users', UserController.store);
  *    put:
  *      tags:
  *          - Users
- * 
+ *
  *      summary: Altera um Usuário
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -129,7 +133,7 @@ routes.post('/users', UserController.store);
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/User'
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -137,11 +141,11 @@ routes.post('/users', UserController.store);
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/User'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
-routes.put('/users/:id',UserController.update);
+routes.put('/users/:id', UserController.update);
 /**
  * @swagger
  * path:
@@ -149,9 +153,9 @@ routes.put('/users/:id',UserController.update);
  *    delete:
  *      tags:
  *          - Users
- * 
+ *
  *      summary: Deleta um Usuário
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -163,16 +167,15 @@ routes.put('/users/:id',UserController.update);
  *      responses:
  *        "200":
  *          description: Ok
-  *          content:
+ *          content:
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/User'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
 routes.delete('/users/:id', UserController.destroy);
-
 
 const VehicleController = require('./controllers/VehicleController');
 
@@ -184,7 +187,7 @@ const VehicleController = require('./controllers/VehicleController');
  *      tags:
  *          - Vehicles
  *      summary: Lista de Veículos
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -192,7 +195,7 @@ const VehicleController = require('./controllers/VehicleController');
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/Vehicle'
- *               
+ *
  */
 routes.get('/vehicles', VehicleController.index);
 /**
@@ -210,7 +213,7 @@ routes.get('/vehicles', VehicleController.index);
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Vehicle'
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -218,9 +221,9 @@ routes.get('/vehicles', VehicleController.index);
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/Vehicle'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
 routes.post('/vehicles', VehicleController.store);
 /**
@@ -238,7 +241,7 @@ routes.post('/vehicles', VehicleController.store);
  *            required: true
  *            schema:
  *              type: string
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -247,7 +250,7 @@ routes.post('/vehicles', VehicleController.store);
  *              schema:
  *                  $ref: '#/components/schemas/Vehicle'
  */
-routes.get('/vehicles/:id',VehicleController.show);
+routes.get('/vehicles/:id', VehicleController.show);
 /**
  * @swagger
  * path:
@@ -255,9 +258,9 @@ routes.get('/vehicles/:id',VehicleController.show);
  *    put:
  *      tags:
  *          - Vehicles
- * 
+ *
  *      summary: Altera um Veículo
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -272,7 +275,7 @@ routes.get('/vehicles/:id',VehicleController.show);
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Vehicle'
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -280,11 +283,11 @@ routes.get('/vehicles/:id',VehicleController.show);
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/Vehicle'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
-routes.put('/vehicles/:id',VehicleController.update);
+routes.put('/vehicles/:id', VehicleController.update);
 /**
  * @swagger
  * path:
@@ -292,9 +295,9 @@ routes.put('/vehicles/:id',VehicleController.update);
  *    delete:
  *      tags:
  *          - Vehicles
- * 
+ *
  *      summary: Deleta um Veículo
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -306,13 +309,13 @@ routes.put('/vehicles/:id',VehicleController.update);
  *      responses:
  *        "200":
  *          description: Ok
-  *          content:
+ *          content:
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/Vehicle'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
 routes.delete('/vehicles/:id', VehicleController.destroy);
 
@@ -333,7 +336,7 @@ const RideController = require('./controllers/RideController');
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Ride'
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -341,9 +344,9 @@ const RideController = require('./controllers/RideController');
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
 routes.post('/rides', RideController.ask);
 /**
@@ -354,7 +357,7 @@ routes.post('/rides', RideController.ask);
  *      tags:
  *          - Rides
  *      summary: Lista de Corridas
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -363,7 +366,7 @@ routes.post('/rides', RideController.ask);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides',RideController.history);
+routes.get('/rides', RideController.history);
 /**
  * @swagger
  * path:
@@ -379,7 +382,7 @@ routes.get('/rides',RideController.history);
  *            required: true
  *            schema:
  *              type: string
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -388,7 +391,7 @@ routes.get('/rides',RideController.history);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides/:id',RideController.status);
+routes.get('/rides/:id', RideController.status);
 
 /**
  * @swagger
@@ -405,7 +408,7 @@ routes.get('/rides/:id',RideController.status);
  *            required: true
  *            schema:
  *              type: string
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -414,7 +417,7 @@ routes.get('/rides/:id',RideController.status);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides/users/:id',RideController.userHistory);
+routes.get('/rides/users/:id', RideController.userHistory);
 
 /**
  * @swagger
@@ -431,7 +434,7 @@ routes.get('/rides/users/:id',RideController.userHistory);
  *            required: true
  *            schema:
  *              type: string
- *           
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -440,7 +443,7 @@ routes.get('/rides/users/:id',RideController.userHistory);
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
  */
-routes.get('/rides/current/users/:id',RideController.currentRide);
+routes.get('/rides/current/users/:id', RideController.currentRide);
 
 /**
  * @swagger
@@ -449,9 +452,9 @@ routes.get('/rides/current/users/:id',RideController.currentRide);
  *    patch:
  *      tags:
  *          - Rides
- * 
+ *
  *      summary: Atualiza Horário de Início ou Fim da Corrida
- * 
+ *
  *      parameters:
  *          - name: id
  *            in: path
@@ -467,11 +470,11 @@ routes.get('/rides/current/users/:id',RideController.currentRide);
  *              application/json:
  *                  schema:
  *                      type: object
- *                      properties: 
+ *                      properties:
  *                          type:
  *                              type: string
- *                          
- *           
+ *
+ *
  *      responses:
  *        "200":
  *          description: Ok
@@ -479,11 +482,10 @@ routes.get('/rides/current/users/:id',RideController.currentRide);
  *            application/json:
  *              schema:
  *                  $ref: '#/components/schemas/Ride'
- *       
+ *
  *        "500":
- *          description: Erro        
+ *          description: Erro
  */
-routes.patch('/rides/:id',RideController.updateStatus);
-
+routes.patch('/rides/:id', RideController.updateStatus);
 
 module.exports = routes;
