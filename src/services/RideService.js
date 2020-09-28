@@ -1,6 +1,7 @@
 const vehicleService = require('../services/VehicleService');
 const Ride = require('../models/Rides');
 const dynamoose = require('dynamoose');
+const uuid = require('uuid');
 module.exports = {
   async getRide(id) {
     return await Ride.get(id);
@@ -33,12 +34,14 @@ module.exports = {
   },
   async askNewRide(user, vehicle, startPlace, finishPlace) {
     const newRide = {
+      id: uuid.v1(),
       user: user.toJSON(),
       vehicle: vehicle.toJSON(),
       startPlace: startPlace,
       finishPlace: finishPlace,
       status: 'asked',
     };
+    console.log(newRide);
     return await Ride.create(newRide);
   },
   async startRide(ride) {

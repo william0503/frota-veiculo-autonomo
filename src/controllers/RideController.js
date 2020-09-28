@@ -49,14 +49,10 @@ module.exports = {
       console.log('criou veiculo');
     }
 
-    const ride = await rideService.askNewRide(
-      user,
-      vehicle,
-      startPlace,
-      finishPlace
-    );
-
-    return res.status(201).json(ride);
+    await rideService.askNewRide(user, vehicle, startPlace, finishPlace);
+    const ride = await rideService.getCurrentRide(user.telephone);
+    console.log(ride);
+    return res.status(201).json(ride[0].toJSON());
   },
   async updateStatus(req, res) {
     let ride = await rideService.getRide(req.params.id);

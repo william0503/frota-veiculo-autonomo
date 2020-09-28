@@ -75,7 +75,7 @@ module.exports = {
 
     //var Logon = new Logon(user);
 
-    let logon = new Logon(user, ride);
+    let logon = new Logon(user, ride[0]);
 
     return res.json(logon);
   },

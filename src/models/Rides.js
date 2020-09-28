@@ -41,7 +41,6 @@ const RideSchema = new dynamoose.Schema(
       type: String,
       hashKey: true,
       required: true,
-      default: uuid.v1(),
     },
     user: {
       type: Object,
