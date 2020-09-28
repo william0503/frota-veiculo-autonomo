@@ -1,14 +1,20 @@
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+// const mongoose = require('mongoose');
+const User = require('../models/Users');
 
 module.exports = {
-    async findAll(page) {
-        return await User.paginate({}, { page, limit:10 });
-    },
-    async findUserByTelephone(telephone) {
-        return await User.findOne({telephone: telephone})
-    },
-    async createUser(user){
-        return await User.create(user);
-    }
-}
+  async findAll() {
+    return await User.scan().exec();
+  },
+  async findUserByTelephone(telephone) {
+    return await User.get(telephone);
+  },
+  async createUser(user) {
+    return await User.create(user);
+  },
+  async update(telephone, user) {
+    return Conta.update(telephone, user);
+  },
+  async remove(telephone) {
+    Conta.delete(telephone);
+  },
+};

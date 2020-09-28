@@ -1,50 +1,78 @@
-const mongoose = require('mongoose');
 const vehicleService = require('../services/VehicleService');
-const Ride = mongoose.model('Ride');
-
+const Ride = require('../models/Rides');
+const dynamoose = require('dynamoose');
+const uuid = require('uuid');
 module.exports = {
-    async getRide(id){
-        return await Ride.findById(id);
-    },
-    async getRides(page){
-        console.log('getRides')
-        return await Ride.paginate({}, { page, limit:10, sort: {startTime: -1} });
-    },
-    async getCurrentRide(telephone){
-        console.log(telephone)
-        return await Ride.find({'user.telephone': telephone, 'finishTime': null });
-    },
-    async getUserRides(telephone,page){
-        console.log(telephone)
-        return await Ride.paginate({'user.telephone': telephone, 'finishTime': { $ne: null }}, { page, limit:10, sort: {finishTime: -1} });
-    },
-    async askNewRide(user, vehicle, startPlace, finishPlace){
-        return await Ride.create({
-            user: user,  
-            vehicle: vehicle,
-            startPlace: startPlace,
-            finishPlace: finishPlace,
-            status: 'asked'
-        });
-    },
-    async startRide(ride){
+  async getRide(id) {
+    return await Ride.get(id);
+  },
+  async getRides() {
+    console.log('getRides');
+    return await Ride.scan().exec();
+  },
+  async getCurrentRide(telephone) {
+    return await Ride.scan(
+      new dynamoose.Condition()
+        .where('user.telephone')
+        .eq(telephone)
+        .and()
+        .where('status')
+        .not()
+        .eq('finished')
+    ).exec();
+  },
+  async getUserRides(telephone) {
+    return await Ride.scan(
+      new dynamoose.Condition()
+        .where('user.telephone')
+        .eq(telephone)
+        .and()
+        .where('finishTime')
+        .not()
+        .eq(null)
+    ).exec();
+  },
+  async askNewRide(user, vehicle, startPlace, finishPlace) {
+    const newRide = {
+      id: uuid.v1(),
+      user: user.toJSON(),
+      vehicle: vehicle.toJSON(),
+      startPlace: startPlace,
+      finishPlace: finishPlace,
+      status: 'asked',
+    };
+    console.log(newRide);
+    return await Ride.create(newRide);
+  },
+  async startRide(ride) {
+    ride.startTime = new Date();
+    ride.status = 'started';
 
-        ride.startTime = new Date();
-        ride.status = 'started';
+    return await ride.save();
+  },
+  async finishRide(ride) {
+    ride.finishTime = new Date();
+    ride.status = 'finished';
 
-        return await Ride.findByIdAndUpdate(ride._id, ride, { new: true });
-    },
-    async finishRide(ride){
+    //ride.vehicle = vehicleService.setVehicleAvailable(ride.vehicle);
+    vehicleService.setVehicleAvailable(ride.vehicle);
 
-        ride.finishTime = new Date();
-        ride.status = 'finished';
-            
-        //ride.vehicle = vehicleService.setVehicleAvailable(ride.vehicle);
-        vehicleService.setVehicleAvailable(ride.vehicle);
-
-        return await Ride.findByIdAndUpdate(ride._id, ride, { new: true });
-    },
-    async checkBusyUser(user){
-        return await Ride.findOne({$and:[{"user.telephone": user.telephone}, {$or:[{status: "asked"},{status:"started"}]}]});
-    }
-}
+    return await ride.save();
+  },
+  async checkBusyUser(user) {
+    return await Ride.scan(
+      new dynamoose.Condition()
+        .where('user.telephone')
+        .eq(user.telephone)
+        .and()
+        .parenthesis(
+          new dynamoose.Condition()
+            .where('status')
+            .eq('asked')
+            .or()
+            .where('status')
+            .eq('started')
+        )
+    ).exec();
+  },
+};

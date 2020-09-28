@@ -2,11 +2,11 @@ const express = require('express');
 const routes = express.Router();
 
 // importando o controller
-const UserController = require('./controllers/UserController');
 routes.get('/', (req, res) => {
   return res.send('Acesse ' + process.env.HOST + 'api-docs para documentação');
 });
 
+const UserController = require('./controllers/UserController');
 /**
  * @swagger
  * path:
@@ -177,148 +177,6 @@ routes.put('/users/:id', UserController.update);
  */
 routes.delete('/users/:id', UserController.destroy);
 
-const VehicleController = require('./controllers/VehicleController');
-
-/**
- * @swagger
- * path:
- *  /vehicles/:
- *    get:
- *      tags:
- *          - Vehicles
- *      summary: Lista de Veículos
- *
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/Vehicle'
- *
- */
-routes.get('/vehicles', VehicleController.index);
-/**
- * @swagger
- * path:
- *  /vehicles/:
- *    post:
- *      tags:
- *          - Vehicles
- *      summary: Adiciona um Veículo
- *
- *      requestBody:
- *          required: true
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/Vehicle'
- *
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/Vehicle'
- *
- *        "500":
- *          description: Erro
- */
-routes.post('/vehicles', VehicleController.store);
-/**
- * @swagger
- * path:
- *  /vehicles/{id}:
- *    get:
- *      tags:
- *          - Vehicles
- *      summary: Veículo por Id
- *      parameters:
- *          - name: id
- *            in: path
- *            description: Id do Veículo
- *            required: true
- *            schema:
- *              type: string
- *
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/Vehicle'
- */
-routes.get('/vehicles/:id', VehicleController.show);
-/**
- * @swagger
- * path:
- *  /vehicles/{id}:
- *    put:
- *      tags:
- *          - Vehicles
- *
- *      summary: Altera um Veículo
- *
- *      parameters:
- *          - name: id
- *            in: path
- *            description: Id do Veículo
- *            required: true
- *            schema:
- *              type: string
- *
- *      requestBody:
- *          required: true
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/Vehicle'
- *
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/Vehicle'
- *
- *        "500":
- *          description: Erro
- */
-routes.put('/vehicles/:id', VehicleController.update);
-/**
- * @swagger
- * path:
- *  /vehicles/{id}:
- *    delete:
- *      tags:
- *          - Vehicles
- *
- *      summary: Deleta um Veículo
- *
- *      parameters:
- *          - name: id
- *            in: path
- *            description: Id do Veículo
- *            required: true
- *            schema:
- *              type: string
- *
- *      responses:
- *        "200":
- *          description: Ok
- *          content:
- *            application/json:
- *              schema:
- *                  $ref: '#/components/schemas/Vehicle'
- *
- *        "500":
- *          description: Erro
- */
-routes.delete('/vehicles/:id', VehicleController.destroy);
-
 const RideController = require('./controllers/RideController');
 
 /**
@@ -444,7 +302,7 @@ routes.get('/rides/users/:id', RideController.userHistory);
  *                  $ref: '#/components/schemas/Ride'
  */
 routes.get('/rides/current/users/:id', RideController.currentRide);
-
+routes.get('/vehicles', RideController.findVehicle);
 /**
  * @swagger
  * path:

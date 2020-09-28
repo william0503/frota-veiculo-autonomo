@@ -1,7 +1,12 @@
-//Criando o Schema 
+//Criando o Schema
 
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate');
+// const mongoose = require('mongoose');
+const dynamoose = require('dynamoose');
+
+dynamoose.aws.sdk.config.update({
+  region: process.env.DYNAMODB_REGION,
+});
+// const mongoosePaginate = require('mongoose-paginate');
 
 /**
  * @swagger
@@ -10,36 +15,38 @@ const mongoosePaginate = require('mongoose-paginate');
  *      Vehicle:
  *        type: object
  *        properties:
- *          model:
- *              type: string
+ *          modelName:
+ *              type: String
  *          licensePlate:
- *              type: string
+ *              type: String
  *          status:
- *              type: string
- * 
+ *              type: String
+ *
  *        required:
- *          - model
+ *          - modelName
  *          - licensePlate
  *          - status
- *          
+ *
  */
-const VehicleSchema = new mongoose.Schema({
-    model:{
-        type: String,
-        required: true,
-    },
-    licensePlate:{
-        type: String,
-        required: true,
-    },
-    status:{
-        type: String,
-        required: true
-    }
+const VehicleSchema = new dynamoose.Schema({
+  modelName: {
+    type: String,
+    //required: true,
+  },
+  licensePlate: {
+    type: String,
+    hashKey: true,
+    required: true,
+  },
+  status: {
+    type: String,
+    //required: true,
+  },
 });
 
 // Registrando o mongoose paginate da Aplicação
-VehicleSchema.plugin(mongoosePaginate);
+// VehicleSchema.plugin(mongoosePaginate);
 
 // Registrando o schema
-mongoose.model('Vehicle', VehicleSchema);
+const Vehicle = dynamoose.model('Vehicle', VehicleSchema);
+module.exports = Vehicle;
