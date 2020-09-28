@@ -15,21 +15,21 @@ dynamoose.aws.sdk.config.update({
  *      Vehicle:
  *        type: object
  *        properties:
- *          model:
- *              type: string
+ *          modelName:
+ *              type: String
  *          licensePlate:
- *              type: string
+ *              type: String
  *          status:
- *              type: string
+ *              type: String
  *
  *        required:
- *          - model
+ *          - modelName
  *          - licensePlate
  *          - status
  *
  */
 const VehicleSchema = new dynamoose.Schema({
-  model: {
+  modelName: {
     type: String,
     //required: true,
   },

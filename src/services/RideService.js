@@ -10,41 +10,42 @@ module.exports = {
     return await Ride.scan().exec();
   },
   async getCurrentRide(telephone) {
-    console.log(telephone);
     return await Ride.scan(
       new dynamoose.Condition()
         .where('user.telephone')
         .eq(telephone)
         .and()
-        .where('finishTime')
-        .eq(null)
+        .where('status')
+        .not()
+        .eq('finished')
     ).exec();
   },
   async getUserRides(telephone) {
-    console.log(telephone);
     return await Ride.scan(
       new dynamoose.Condition()
         .where('user.telephone')
         .eq(telephone)
         .and()
         .where('finishTime')
-        .not.eq(null)
+        .not()
+        .eq(null)
     ).exec();
   },
   async askNewRide(user, vehicle, startPlace, finishPlace) {
-    return await Ride.create({
-      user: user,
-      vehicle: vehicle,
+    const newRide = {
+      user: user.toJSON(),
+      vehicle: vehicle.toJSON(),
       startPlace: startPlace,
       finishPlace: finishPlace,
       status: 'asked',
-    });
+    };
+    return await Ride.create(newRide);
   },
   async startRide(ride) {
     ride.startTime = new Date();
     ride.status = 'started';
 
-    return await Ride.update(ride.id, ride);
+    return await ride.save();
   },
   async finishRide(ride) {
     ride.finishTime = new Date();
@@ -53,7 +54,7 @@ module.exports = {
     //ride.vehicle = vehicleService.setVehicleAvailable(ride.vehicle);
     vehicleService.setVehicleAvailable(ride.vehicle);
 
-    return await Ride.findByIdAndUpdate(ride.id, ride);
+    return await ride.save();
   },
   async checkBusyUser(user) {
     return await Ride.scan(

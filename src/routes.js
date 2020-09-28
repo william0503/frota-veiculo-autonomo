@@ -302,7 +302,7 @@ routes.get('/rides/users/:id', RideController.userHistory);
  *                  $ref: '#/components/schemas/Ride'
  */
 routes.get('/rides/current/users/:id', RideController.currentRide);
-
+routes.get('/vehicles', RideController.findVehicle);
 /**
  * @swagger
  * path:

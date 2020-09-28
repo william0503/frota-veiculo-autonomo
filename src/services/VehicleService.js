@@ -6,12 +6,14 @@ const NewLicensePlate = require('../utils/NewLicensePlate');
 module.exports = {
   async createVehicle() {
     const licensePlate = NewLicensePlate();
-    console.log(licensePlate);
-    return await Vehicle.create({
-      model: 'Tesla Model S',
+    //console.log(licensePlate);
+    const newVehicle = {
+      modelName: 'Tesla Model S',
       licensePlate: licensePlate,
       status: 'busy',
-    });
+    };
+    //console.log(newVehicle);
+    return await Vehicle.create(newVehicle);
   },
   async getAvailableVehicle() {
     return await Vehicle.scan(
@@ -21,11 +23,15 @@ module.exports = {
       .exec();
   },
   async setVehicleBusy(vehicle) {
-    vehicle.status = 'busy';
-    return await Vehicle.update(vehicle.licensePlate, vehicle);
+    return await Vehicle.update(
+      { licensePlate: vehicle.licensePlate },
+      { status: 'busy' }
+    );
   },
   async setVehicleAvailable(vehicle) {
-    vehicle.status = 'available';
-    return await Vehicle.update(vehicle.licensePlate, vehicle);
+    return await Vehicle.update(
+      { licensePlate: vehicle.licensePlate },
+      { status: 'available' }
+    );
   },
 };

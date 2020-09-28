@@ -22,6 +22,7 @@ module.exports = {
     return res.json(await rideService.getUserRides(telephone, page));
   },
   async ask(req, res) {
+    console.log(req.body);
     const { telephone, startPlace, finishPlace } = req.body;
 
     const user = await userService.findUserByTelephone(telephone);
@@ -30,7 +31,7 @@ module.exports = {
       return res.status(400).send('Usuário não encontrado');
     } else {
       const busyUser = await rideService.checkBusyUser(user);
-      console.log(busyUser);
+      //console.log(busyUser);
       if (busyUser[0]) {
         return res.status(403).send('O usuário já está em uma corrida');
       }
@@ -38,7 +39,7 @@ module.exports = {
     console.log('validado');
     let vehicle = await vehicleService.getAvailableVehicle();
     console.log('obteve veiculo');
-    console.log(vehicle);
+    console.log(vehicle[0]);
     if (vehicle[0]) {
       vehicle = await vehicleService.setVehicleBusy(vehicle[0]);
       console.log('definiu ocupado');
@@ -59,7 +60,6 @@ module.exports = {
   },
   async updateStatus(req, res) {
     let ride = await rideService.getRide(req.params.id);
-
     if (!ride) {
       return res.status(400).send('Corrida não encontrada');
     }
@@ -84,5 +84,10 @@ module.exports = {
       default:
         return res.status(400).send('O valor aguardado é start ou finish.');
     }
+  },
+  async findVehicle(req, res) {
+    const vehicle = await vehicleService.getAvailableVehicle();
+    console.log(vehicle[0].toJSON());
+    return res.status(200).json(vehicle[0].toJSON());
   },
 };
