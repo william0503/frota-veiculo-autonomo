@@ -5,7 +5,7 @@ const options = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Frota de veículos autonomos',
+      title: 'Me Leva Aí',
       version: '1.0.0',
       description: 'API para gestão de frota de veículos autonomos',
       license: {
@@ -20,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: `${process.env.HOST}api/`,
+        url: `${process.env.HOST}/api/`,
       },
     ],
   },

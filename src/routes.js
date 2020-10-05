@@ -2,10 +2,6 @@ const express = require('express');
 const routes = express.Router();
 
 // importando o controller
-routes.get('/', (req, res) => {
-  return res.send('Acesse ' + process.env.HOST + 'api-docs para documentação');
-});
-
 const UserController = require('./controllers/UserController');
 /**
  * @swagger
